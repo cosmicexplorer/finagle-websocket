@@ -1,14 +1,13 @@
 import sbt._
 import Keys._
-import scoverage.ScoverageSbtPlugin
 
 object FinagleWebsocket extends Build {
-  val libVersion = "6.34.0"
+  val libVersion = "6.41.0"
 
   val baseSettings = Defaults.defaultSettings ++ Seq(
     libraryDependencies ++= Seq(
       "com.twitter" %% "finagle-core" % libVersion,
-      "org.scalatest" %% "scalatest" % "2.2.5" % "test",
+      "org.scalatest" %% "scalatest" % "3.0.1" % "test",
       "junit" % "junit" % "4.12" % "test"
     )
   )
@@ -16,15 +15,9 @@ object FinagleWebsocket extends Build {
   lazy val buildSettings = Seq(
     organization := "com.github.finagle",
     version := libVersion,
-    scalaVersion := "2.11.7",
-    crossScalaVersions := Seq("2.10.5", "2.11.7"),
-    scalacOptions ++= Seq("-deprecation", "-feature"),
-    ScoverageSbtPlugin.ScoverageKeys.coverageHighlighting := (
-      CrossVersion.partialVersion(scalaVersion.value) match {
-        case Some((2, 10)) => false
-        case _ => true
-      }
-    )
+    scalaVersion := "2.12.1",
+    crossScalaVersions := Seq("2.10.5", "2.11.7", "2.12.1"),
+    scalacOptions ++= Seq("-deprecation", "-feature")
   )
 
   lazy val publishSettings = Seq(

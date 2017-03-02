@@ -32,10 +32,6 @@ object Websocket extends Server[Request, Response] {
     def withTlsWithoutValidation: Client = withTransport.tlsWithoutValidation
 
     def withTls(hostname: String): Client = withTransport.tls(hostname)
-
-    def withTls(cfg: Netty3TransporterTLSConfig): Client =
-      configured(Transport.TLSClientEngine(Some(cfg.newEngine))
-        ).configured(Transporter.TLSHostname(cfg.verifyHost))
   }
 
   val client: Client = Client()
